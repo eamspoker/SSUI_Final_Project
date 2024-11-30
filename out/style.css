@@ -1,0 +1,29 @@
+* {
+	box-sizing: border-box;
+}
+
+
+#FSM-container {
+    margin: 0;
+    margin-left: 50px;
+    border: 0;
+    float: left;
+
+}
+#p2-main-canvas {
+    outline: 1px black solid;
+    background: rgb(255, 255, 255);
+}
+
+#building-canvas {
+    background: rgb(255, 255, 255);
+    width: 500px;
+    height: 800px;
+}
+
+#building-container {
+    border: 0;
+    padding: 0px;
+    float: left;
+
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>FSM test page</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script type="importmap">
+			{
+			  "imports": {
+				"three": "https://cdn.jsdelivr.net/npm/three@v0.171.0/build/three.module.js",
+				"three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.171.0/examples/jsm/"
+			  }
+			}
+		  </script>
+	</head>
+	<body>
+
+		
+
+		<div id="building-container">
+			<div id="building-canvas"> 
+			</div>
+			<input type="text" id="output" value="0xff00ff" />
+		</div>
+
+		<div id="FSM-container">
+			<canvas id="FSM-main-canvas" width="768" height="768"> 
+			</canvas>
+			
+		</div>
+
+
+		<script type="module" src="/Building.js"></script>
+
+
+		<script type="module">
+			import {ShowSettings} from "./Settings.js";
+			console.log("running in index.html");
+			ShowSettings();
+			console.log("ShowSettings() returns to index.html")
+		</script>
+	
+		</div>
+   </body>
+</html>
