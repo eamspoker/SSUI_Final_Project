@@ -16,6 +16,8 @@
 }
 
 #building-canvas {
+    grid-column: 2;
+    grid-row: 1;
     background: rgb(255, 255, 255);
     width: 500px;
     height: 800px;
@@ -26,4 +28,67 @@
     padding: 0px;
     float: left;
 
+}
+
+#text_editing
+{
+    width: 768px;
+    height: 75px;
+    grid-column: 1;
+    grid-row: 3;
+}
+
+#controls, #settings
+{
+    display: grid;
+
+}
+
+
+button
+{
+    grid-row: 2;
+    width: 25%;
+    padding: 10px;
+    margin-bottom:50px;
+    background-color: #C8E6DF;
+    border-radius: 12px;
+    border: none;
+   
+}
+
+#prev_menu 
+{
+    grid-column: 1;
+    float: left;
+}
+#next_menu 
+{
+    grid-column: 1;
+    float:right;
+    justify-self: end;
+    
+
+
+}
+
+#spinwrapper
+{
+    grid-column: 2; 
+    grid-row: 3; 
+}
+
+input[type=range][orient=vertical] {
+    grid-column: 1;
+    grid-row: 1;
+    writing-mode: vertical-lr;
+    direction: rtl;
+    appearance: slider-vertical;
+    width: 16px;
+    vertical-align: bottom;
+}
+
+#camera_rot_y {
+    grid-column: 2;
+    grid-row: 2;
 }

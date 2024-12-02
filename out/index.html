@@ -18,14 +18,27 @@
 		
 
 		<div id="building-container">
+			
+			<div id="controls">
 			<div id="building-canvas"> 
 			</div>
-			<input type="text" id="output" value="0xff00ff" />
+			<input type="range" id="camera_rot_y" min="-180" max="180" value="0" class="slider" id="myRange">
+			<input type="range" id="camera_rot_x" min="-30" max="30" value="0" class="slider" id="myRange" orient="vertical">
+			<div id="spinwrapper">
+				<input type="checkbox" id="spin" style="float:left; display:inline;">Spin Building?</input>
+			</div>
+			</div>
 		</div>
 
 		<div id="FSM-container">
-			<canvas id="FSM-main-canvas" width="768" height="768"> 
+			<canvas id="FSM-main-canvas" width="768" height="600"> 
 			</canvas>
+			<div id="settings" width="768">
+				<button id="prev_menu">Previous</button>
+				<button id="next_menu">Next</button>
+			</div>
+			<input type="text" id="text_editing" value="0xff00ff;0xff00ff;0xff00ff;0xff00ff;1;2;0;0;0;0" />
+
 			
 		</div>
 

@@ -172,7 +172,9 @@ export class FSMInteractor {
     // last drawn region should be dispatched first (i.e., events are delivered in 
     // reverse region drawing order). Note that all generated higher-level events
     // are dispatched to the FSM (via its actOnEvent() method).
-    dispatchRawEvent(what, localX, localY) {
+    // Note for final project: I added context as a parameter so that 
+    // I could read color values from the canvas
+    dispatchRawEvent(what, localX, localY, ctx) {
         var _a;
         // if we have no FSM, there is nothing to dispatch to
         if (this.fsm === undefined)
@@ -189,7 +191,7 @@ export class FSMInteractor {
                 if (picked && prevIn) {
                     // if we were already in the region and remained inside 
                     // of it, is a move_inside event
-                    (_a = this.fsm) === null || _a === void 0 ? void 0 : _a.actOnEvent('move_inside', region);
+                    (_a = this.fsm) === null || _a === void 0 ? void 0 : _a.actOnEvent('move_inside', region, localX, localY, ctx);
                     // unshift places items at the beginning of the list
                     // we use this for reverse drawing order
                     current_regions.unshift(region);
@@ -197,7 +199,7 @@ export class FSMInteractor {
                 else if (picked) {
                     // if we weren't previously in the region, but are now
                     // it is an enter event
-                    (_b = this.fsm) === null || _b === void 0 ? void 0 : _b.actOnEvent('enter', region);
+                    (_b = this.fsm) === null || _b === void 0 ? void 0 : _b.actOnEvent('enter', region, localX, localY);
                     // unshift places items at the beginning of the list
                     // we use this for reverse drawing order
                     current_regions.unshift(region);
@@ -205,7 +207,7 @@ export class FSMInteractor {
                 else if (prevIn) {
                     // if we were in the region, but no longer are after
                     // this, we exit the event
-                    (_c = this.fsm) === null || _c === void 0 ? void 0 : _c.actOnEvent('exit', region);
+                    (_c = this.fsm) === null || _c === void 0 ? void 0 : _c.actOnEvent('exit', region, localX, localY);
                 }
             });
             // update regions list for bookkeeping
@@ -219,7 +221,7 @@ export class FSMInteractor {
                 let picked = region.pick(localX - region.x, localY - region.y);
                 if (picked) {
                     // ... if it is, act on it
-                    (_a = this.fsm) === null || _a === void 0 ? void 0 : _a.actOnEvent('press', region);
+                    (_a = this.fsm) === null || _a === void 0 ? void 0 : _a.actOnEvent('press', region, localX, localY);
                 }
             });
         }
@@ -235,7 +237,7 @@ export class FSMInteractor {
                 let picked = region.pick(localX - region.x, localY - region.y);
                 if (picked) {
                     // ... if it is, act on it
-                    (_a = this.fsm) === null || _a === void 0 ? void 0 : _a.actOnEvent('release', region);
+                    (_a = this.fsm) === null || _a === void 0 ? void 0 : _a.actOnEvent('release', region, localX, localY);
                     hasReleased = true;
                 }
             });

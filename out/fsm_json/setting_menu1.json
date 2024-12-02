@@ -1,83 +1,226 @@
 {
     "regions": [
         {
-            "name": "title",
-            "x": 78.5, "y": 150, "w":-1, "h":-1, 
-            "imageLoc": "./images/chooseamount.png"
+            "name": "bg",
+            "x":0, "y": 0, "w":-1, "h":-1, 
+            "imageLoc": "./images/bg.png"
         },
         {
-            "name": "tip15",
-            "x": 0, "y": 250, "w":-1, "h":-1, 
-            "imageLoc": "./images/tip15.png"
+            "name": "title1",
+            "x":10, "y": 30, "w":-1, "h":-1, 
+            "imageLoc": "./images/adjusttitle.png"
         },
         {
-            "name": "tip20",
-            "x":150, "y": 250, "w":-1, "h":-1, 
-            "imageLoc": "./images/tip20.png"
+            "name": "subtitle1",
+            "x":70, "y": 106, "w":-1, "h":-1, 
+            "imageLoc": "./images/x.png"
         },
         {
-            "name": "tip25",
-            "x": 300, "y": 250, "w":-1, "h":-1, 
-            "imageLoc": "./images/tip25.png"
+            "name": "slider1",
+            "x": 134, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/slider.png"
         },
         {
-            "name": "tiplong",
-            "x": 0, "y": 400, "w":-1, "h":-1, 
-            "imageLoc": "./images/tiplong.png"
-        }
-        
+            "name": "subtitle2",
+            "x":70, "y": 208, "w":-1, "h":-1, 
+            "imageLoc": "./images/y.png"
+        },
+        {
+            "name": "slider2",
+            "x":134, "y": 180, "w":-1, "h":-1, 
+            "imageLoc": "./images/slider.png"
+        },
+        {
+            "name": "subtitle3",
+            "x":70, "y": 306, "w":-1, "h":-1, 
+            "imageLoc": "./images/z.png"
+        },
+        {
+            "name": "slider3",
+            "x": 134, "y": 280, "w":-1, "h":-1, 
+            "imageLoc": "./images/slider.png"
+        },
+        {
+            "name": "title2",
+            "x":10, "y": 380, "w":-1, "h":-1, 
+            "imageLoc": "./images/rotate.png"
+        },
 
+        {
+            "name": "slider4",
+            "x": 134, "y": 430, "w":-1, "h":-1, 
+            "imageLoc": "./images/slider.png"
+        }
     ], 
     "states":[
         {
             "name" : "initial_state",
             "transitions" : [
                 {
-                    "onEvent" : {"evtType" : "enter", "region" : "tip25"},
-                    "target" : "over_tip25",
+                    "onEvent" : {"evtType" : "enter", "region" : "slider1"},
+                    "target" : "over_slider1",
+                    "actions" : []
+                }, {
+                    "onEvent" : {"evtType" : "enter", "region" : "slider2"},
+                    "target" : "over_slider2",
                     "actions" : []
                 },
                 {
-                    "onEvent" : {"evtType" : "enter", "region" : "tip15"},
-                    "target" : "over_tip15",
+                    "onEvent" : {"evtType" : "enter", "region" : "slider3"},
+                    "target" : "over_slider3",
                     "actions" : []
-                },  {
-                    "onEvent" : {"evtType" : "enter", "region" : "tip20"},
-                    "target" : "over_tip20",
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "slider4"},
+                    "target" : "over_slider4",
                     "actions" : []
+                }
+
+
+                
+                
+                
+            ]
+        },
+        {
+            "name" : "over_slider1",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "slider1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "slider1"},
+                    "target" : "slider1_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider1", "param": "6"}]
+                }
+
+            ]
+        }, {
+            "name" : "slider1_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "slider1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "slider1"},
+                    "target" : "slider1_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider1", "param": "6"}]
+                },
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "slider1"},
+                    "target" : "over_slider1",
+                    "actions" : [{"act": "set_slider", "region": "slider1", "param": "6"}]
                 }
             ]
         },
         {
-            "name" : "over_tip25",
+            "name" : "over_slider2",
             "transitions" : [
                 {
-                    "onEvent" : {"evtType" : "exit", "region" : "tip25"},
+                    "onEvent" : {"evtType" : "exit", "region" : "slider2"},
                     "target" : "initial_state",
                     "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "slider2"},
+                    "target" : "slider2_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider2", "param": "7"}]
+                }
+
+            ]
+        }, {
+            "name" : "slider2_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "slider2"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "slider2"},
+                    "target" : "slider2_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider2", "param": "7"}]
+                },
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "slider2"},
+                    "target" : "over_slider2",
+                    "actions" : [{"act": "set_slider", "region": "slider2", "param": "7"}]
+                }
+            ]
+        }, {
+            "name" : "over_slider3",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "slider3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "slider3"},
+                    "target" : "slider3_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider3", "param": "8"}]
+                }
+
+            ]
+        }, {
+            "name" : "slider3_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "slider3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }, 
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "slider3"},
+                    "target" : "slider3_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider3", "param": "8"}]
+                },
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "slider3"},
+                    "target" : "over_slider3",
+                    "actions" : [{"act": "set_slider", "region": "slider3", "param": "8"}]
                 }
             ]
         },
 
         {
-            "name" : "over_tip15",
+            "name" : "over_slider4",
             "transitions" : [
                 {
-                    "onEvent" : {"evtType" : "exit", "region" : "tip15"},
+                    "onEvent" : {"evtType" : "exit", "region" : "slider4"},
                     "target" : "initial_state",
                     "actions" : []
+                },
+                
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "slider4"},
+                    "target" : "slider4_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider4", "param": "9"}]
                 }
+
             ]
-        },
-
-        {
-            "name" : "over_tip20",
+        }, {
+            "name" : "slider4_selected",
             "transitions" : [
-
                 {
-                    "onEvent" : {"evtType" : "exit", "region" : "tip20"},
+                    "onEvent" : {"evtType" : "exit", "region" : "slider4"},
                     "target" : "initial_state",
                     "actions" : []
+                }, 
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "slider4"},
+                    "target" : "slider4_selected",
+                    "actions" : [{"act": "set_slider", "region": "slider4", "param": "9"}]
+                },
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "slider4"},
+                    "target" : "over_slider4",
+                    "actions" : [{"act": "set_slider", "region": "slider4", "param": "9"}]
                 }
             ]
         }

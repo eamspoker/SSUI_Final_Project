@@ -1,0 +1,348 @@
+{
+    "regions": [
+        {
+            "name": "bg",
+            "x":0, "y": 0, "w":-1, "h":-1, 
+            "imageLoc": "./images/bg.png"
+        },
+        {
+            "name": "title1",
+            "x":10, "y": 30, "w":-1, "h":-1, 
+            "imageLoc": "./images/title.png"
+        },
+        {
+            "name": "choice1",
+            "x": 10, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/selected1.png"
+        },
+        {
+            "name": "choice2",
+            "x":160, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/unselected2.png"
+        },
+        {
+            "name": "choice3",
+            "x": 310, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/unselected3.png"
+        },
+        {
+            "name": "title2",
+            "x":10, "y": 265, "w":-1, "h":-1, 
+            "imageLoc": "./images/colormenu.png"
+        },
+        {
+            "name": "colorwheel",
+            "x": 15, "y": 315, "w":-1, "h":-1, 
+            "imageLoc": "./images/colorwheel.png"
+        },
+        {
+            "name": "colorwheel1",
+            "x": 195, "y": 315, "w":-1, "h":-1, 
+            "imageLoc": "./images/colorwheel.png"
+        }, {
+            "name": "colorwheel2",
+            "x": 375, "y": 315, "w":-1, "h":-1, 
+            "imageLoc": "./images/colorwheel.png"
+        }, {
+            "name": "colorwheel3",
+            "x":555, "y": 315, "w":-1, "h":-1, 
+            "imageLoc": "./images/colorwheel.png"
+        }
+    ], 
+    "states":[
+        {
+            "name" : "initial_state",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "choice1"},
+                    "target" : "over_choice1",
+                    "actions" : []
+                }, {
+                    "onEvent" : {"evtType" : "enter", "region" : "choice2"},
+                    "target" : "over_choice2",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "choice3"},
+                    "target" : "over_choice3",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "colorwheel"},
+                    "target" : "over_colorwheel",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "colorwheel1"},
+                    "target" : "over_colorwheel1",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "colorwheel2"},
+                    "target" : "over_colorwheel2",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "colorwheel3"},
+                    "target" : "over_colorwheel3",
+                    "actions" : []
+                }
+
+                
+                
+                
+            ]
+        },
+        {
+            "name" : "over_choice1",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "choice1"},
+                    "target" : "choice1_selected",
+                    "actions" : [
+                        {"act": "set_image", "region": "choice1", "param": "./images/selected1.png"},
+                        {"act": "set_image", "region": "choice2", "param": "./images/unselected2.png"},
+                        {"act": "set_image", "region": "choice3", "param": "./images/unselected3.png"},
+                        {"act": "set_feature", "region": "choice1", "param": "4,1"}
+                    ]
+                    }
+
+            ]
+        }, {
+            "name" : "choice1_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }
+            ]
+        },
+        {
+            "name" : "over_choice2",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice2"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "choice2"},
+                    "target" : "choice2_selected",
+                    "actions" : [
+                        {"act": "set_image", "region": "choice2", "param": "./images/selected2.png"},
+                        {"act": "set_image", "region": "choice1", "param": "./images/unselected1.png"},
+                        {"act": "set_image", "region": "choice3", "param": "./images/unselected3.png"},
+                        {"act": "set_feature", "region": "choice2", "param": "4,2"}
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "choice2_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice2"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }
+            ]
+        }, {
+            "name" : "over_choice3",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "choice3"},
+                    "target" : "choice3_selected",
+                    "actions" : [
+                        {"act": "set_image", "region": "choice3", "param": "./images/selected3.png"},
+                        {"act": "set_image", "region": "choice1", "param": "./images/unselected1.png"},
+                        {"act": "set_image", "region": "choice2", "param": "./images/unselected2.png"},
+                        {"act": "set_feature", "region": "choice3", "param": "4,3"}
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "choice3_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }
+            ]
+        }, {
+            "name" : "over_colorwheel",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "colorwheel"},
+                    "target" : "colorwheel_mousedown",
+                    "actions" : [
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "colorwheel_mousedown",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "colorwheel"},
+                    "target" : "colorwheel_mousedown",
+                    "actions" : [
+                        {"act": "set_color", "region": "colorwheel", "param": "0"}
+                    ]
+                },  
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "colorwheel"},
+                    "target" : "over_colorwheel",
+                    "actions" : []
+                }
+            ]
+
+            
+        }, 
+        {
+            "name" : "over_colorwheel1",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "colorwheel1"},
+                    "target" : "colorwheel1_mousedown",
+                    "actions" : [
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "colorwheel1_mousedown",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "colorwheel1"},
+                    "target" : "colorwheel1_mousedown",
+                    "actions" : [
+                        {"act": "set_color", "region": "colorwheel1", "param": "1"}
+                    ]
+                },  
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "colorwheel1"},
+                    "target" : "over_colorwheel1",
+                    "actions" : []
+                }
+            ]
+
+            
+        },{
+            "name" : "over_colorwheel2",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel2"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "colorwheel2"},
+                    "target" : "colorwheel2_mousedown",
+                    "actions" : [
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "colorwheel2_mousedown",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel2"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "colorwheel2"},
+                    "target" : "colorwheel2_mousedown",
+                    "actions" : [
+                        {"act": "set_color", "region": "colorwheel2", "param": "2"}
+                    ]
+                },  
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "colorwheel2"},
+                    "target" : "over_colorwheel2",
+                    "actions" : []
+                }
+            ]
+
+            
+        }, 
+        {
+            "name" : "over_colorwheel3",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "colorwheel3"},
+                    "target" : "colorwheel3_mousedown",
+                    "actions" : [
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "colorwheel3_mousedown",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "colorwheel3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+
+                {
+                    "onEvent" : {"evtType" : "move_inside", "region" : "colorwheel3"},
+                    "target" : "colorwheel3_mousedown",
+                    "actions" : [
+                        {"act": "set_color", "region": "colorwheel2", "param": "3"}
+                    ]
+                },  
+                {
+                    "onEvent" : {"evtType" : "release", "region" : "colorwheel3"},
+                    "target" : "over_colorwheel3",
+                    "actions" : []
+                }
+            ]
+
+            
+        }
+    ]
+}

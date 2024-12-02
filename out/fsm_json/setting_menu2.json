@@ -1,0 +1,187 @@
+{
+    "regions": [
+        {
+            "name": "bg",
+            "x":0, "y": 0, "w":-1, "h":-1, 
+            "imageLoc": "./images/bg.png"
+        },
+        {
+            "name": "title1",
+            "x":10, "y": 30, "w":-1, "h":-1, 
+            "imageLoc": "./images/backgroundtitle.png"
+        },
+        {
+            "name": "choice1",
+            "x": 10, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/unselected_sky1.png"
+        },
+        {
+            "name": "choice2",
+            "x":160, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/selected_sky2.png"
+        },
+        {
+            "name": "choice3",
+            "x": 310, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/unselected_sky3.png"
+        },
+        {
+            "name": "choice4",
+            "x": 460, "y": 80, "w":-1, "h":-1, 
+            "imageLoc": "./images/unselected_sky4.png"
+        }
+    ], 
+    "states":[
+        {
+            "name" : "initial_state",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "choice1"},
+                    "target" : "over_choice1",
+                    "actions" : []
+                }, {
+                    "onEvent" : {"evtType" : "enter", "region" : "choice2"},
+                    "target" : "over_choice2",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "choice3"},
+                    "target" : "over_choice3",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "enter", "region" : "choice4"},
+                    "target" : "over_choice4",
+                    "actions" : []
+                }
+
+                
+                
+                
+            ]
+        },
+        {
+            "name" : "over_choice1",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "choice1"},
+                    "target" : "choice1_selected",
+                    "actions" : [
+                        {"act": "set_image", "region": "choice1", "param": "./images/selected_sky1.png"},
+                        {"act": "set_image", "region": "choice2", "param": "./images/unselected_sky2.png"},
+                        {"act": "set_image", "region": "choice3", "param": "./images/unselected_sky3.png"},
+                        {"act": "set_image", "region": "choice4", "param": "./images/unselected_sky4.png"},
+                        {"act": "set_feature", "region": "choice1", "param": "5,1"}
+                    ]
+                    }
+
+            ]
+        }, {
+            "name" : "choice1_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice1"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }
+            ]
+        },
+        {
+            "name" : "over_choice2",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice2"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "choice2"},
+                    "target" : "choice2_selected",
+                    "actions" : [
+                        {"act": "set_image", "region": "choice2", "param": "./images/selected_sky2.png"},
+                        {"act": "set_image", "region": "choice1", "param": "./images/unselected_sky1.png"},
+                        {"act": "set_image", "region": "choice3", "param": "./images/unselected_sky3.png"},
+                        {"act": "set_image", "region": "choice4", "param": "./images/unselected_sky4.png"},
+                        {"act": "set_feature", "region": "choice2", "param": "5,2"}
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "choice2_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice2"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }
+            ]
+        }, {
+            "name" : "over_choice3",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "choice3"},
+                    "target" : "choice3_selected",
+                    "actions" : [
+                        {"act": "set_image", "region": "choice3", "param": "./images/selected_sky3.png"},
+                        {"act": "set_image", "region": "choice1", "param": "./images/unselected_sky1.png"},
+                        {"act": "set_image", "region": "choice2", "param": "./images/unselected_sky2.png"},
+                        {"act": "set_image", "region": "choice4", "param": "./images/unselected_sky4.png"},
+                        {"act": "set_feature", "region": "choice3", "param": "5,3"}
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "choice3_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice3"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }
+            ]
+        },
+        {
+            "name" : "over_choice4",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice4"},
+                    "target" : "initial_state",
+                    "actions" : []
+                },
+                {
+                    "onEvent" : {"evtType" : "press", "region" : "choice4"},
+                    "target" : "choice4_selected",
+                    "actions" : [
+                        {"act": "set_image", "region": "choice3", "param": "./images/unselected_sky3.png"},
+                        {"act": "set_image", "region": "choice1", "param": "./images/unselected_sky1.png"},
+                        {"act": "set_image", "region": "choice2", "param": "./images/unselected_sky2.png"},
+                        {"act": "set_image", "region": "choice4", "param": "./images/selected_sky4.png"},
+                        {"act": "set_feature", "region": "choice4", "param": "5,4"}
+                    ]
+                }
+
+            ]
+        }, {
+            "name" : "choice4_selected",
+            "transitions" : [
+                {
+                    "onEvent" : {"evtType" : "exit", "region" : "choice4"},
+                    "target" : "initial_state",
+                    "actions" : []
+                }
+            ]
+        }
+    ]
+}

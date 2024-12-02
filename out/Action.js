@@ -1,6 +1,6 @@
 import { Err } from "./Err.js";
 import { Check } from "./Check.js";
-const actionTypeStrings = ['set_image', 'clear_image', 'none', 'print', 'print_event'];
+const actionTypeStrings = ['set_image', 'clear_image', 'none', 'print', 'print_event', 'set_feature', 'set_color', 'set_slider'];
 //. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 export class Action {
     constructor(actType, regionName, param) {
@@ -28,7 +28,10 @@ export class Action {
     //-------------------------------------------------------------------
     // Carry out the action represented by this object.  evtType and evtReg describe
     // the event which is causing the action (for use by print_event actions).
-    execute(evtType, evtReg) {
+    // Note for final project: I added mouseX and mouseY as parameters so that I could
+    // have space-related interactions (sliders, color pickers) and the canvas so that
+    // I could read the canvas color for the color picker
+    execute(evtType, evtReg, mouseX, mouseY, ctx) {
         if (this._actType === 'none')
             return;
         // perform an action based on this objects' type
@@ -53,6 +56,87 @@ export class Action {
                 // print a string representing the entire event
                 console.log(this.param + " " + evtType + " " + (evtReg === null || evtReg === void 0 ? void 0 : evtReg.name));
                 break;
+            case 'set_feature':
+                {
+                    // set a (non-color) feature of the 3D model
+                    // expected parameters are:
+                    // setting number, 
+                    // value to set
+                    let params = this.param.split(",");
+                    // look for output field
+                    let output = document.getElementById("text_editing");
+                    if (output) {
+                        let features = output.value.split(";");
+                        // look up index with first element, set to second element
+                        features[parseInt(params[0])] = params[1];
+                        // update the text editing box to reflect the new features
+                        output.value = features.join(';');
+                    }
+                    else {
+                        throw "HTML element with ID: text_editing returned null.";
+                    }
+                    break;
+                }
+            case 'set_color':
+                {
+                    // set a color feature of the 3D model based on the color
+                    // underneath the mouse
+                    // expected parameters are:
+                    // setting number
+                    let params = this.param.split(",");
+                    // look for output field
+                    let output = document.getElementById("text_editing");
+                    if (output && mouseX != undefined && mouseY != undefined && ctx) {
+                        let features = output.value.split(";");
+                        // get the image data based on the mouseX and mouseY
+                        let curr_imgData = ctx.getImageData(mouseX, mouseY, 1, 1).data;
+                        // convert each image value data in the array to the 
+                        // corresponding RGB hex value
+                        let r = curr_imgData[0].toString(16);
+                        r = r.length == 1 ? "0" + r : r;
+                        let g = curr_imgData[1].toString(16);
+                        g = g.length == 1 ? "0" + g : g;
+                        let b = curr_imgData[2].toString(16);
+                        b = b.length == 1 ? "0" + b : b;
+                        // look up index with first element, set to RGB hex value
+                        features[parseInt(params[0])] = "0x" + r + g + b;
+                        // update the text editing box to reflect the new features
+                        output.value = features.join(';');
+                        // if we have a region, we need to declare damage
+                        // to redraw color-specific components 
+                        if (this.onRegion) {
+                            this.onRegion.damage();
+                        }
+                    }
+                    else {
+                        throw "HTML element with ID: text_editing returned null.";
+                    }
+                    break;
+                }
+            case 'set_slider':
+                {
+                    let params = this.param.split(",");
+                    // look for output field
+                    let output = document.getElementById("text_editing");
+                    if (output) {
+                        let features = output.value.split(";");
+                        // calculate the value of the slider by linear interpolation
+                        // note that this only supports horizontal sliders
+                        if (mouseX != undefined && this.onRegion) {
+                            let newValue = ((mouseX - this.onRegion.x) / this.onRegion.w);
+                            newValue = newValue < 0 ? 0 : (newValue > 1 ? 1 : newValue);
+                            // look up index with param, set to slider value
+                            features[parseInt(params[0])] = "" + newValue;
+                            // update the text editing box to reflect the new features
+                            output.value = features.join(';');
+                            // we need to declare damage to redraw the sliders
+                            this.onRegion.damage();
+                        }
+                    }
+                    else {
+                        throw "HTML element with ID: text_editing returned null.";
+                    }
+                }
             default:
                 break;
         }

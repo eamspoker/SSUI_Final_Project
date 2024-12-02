@@ -192,7 +192,17 @@ export class Root {
             default:
                 return;
         }
-        toChild.dispatchRawEvent(evtKind, childX, childY);
+        // in order to support events that have awareness of color
+        // for the color picker, we now have to pass the canvas into
+        // dispatchRawEvent
+        let ctx = this.owningCanvas.getContext('2d');
+        if (ctx) {
+            // if we have the canvas context, dispatchRawEvent
+            toChild.dispatchRawEvent(evtKind, childX, childY, ctx);
+        }
+        else {
+            throw "Error: tried to dispatch raw event without canvas.";
+        }
     }
     //. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     // Utility method to pull out the canvas with the given id and extract 

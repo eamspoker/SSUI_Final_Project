@@ -142,8 +142,48 @@ export class Region {
     draw(ctx, showDebugFrame = false) {
         // if we have a valid loaded image, draw it
         if (this.loaded && !this.loadError && this.image) {
+            // draw square representing selected color if this is a colorwheel
+            // object
+            if (this.name.includes("colorwheel")) {
+                // add a white background behind so colors can be seem more clearly
+                ctx.fillStyle = "white";
+                ctx.fillRect(-5, -5, this.w + 10, this.h + 50);
+                // find the index of this feature
+                let index = this.name.split("colorwheel")[1] != "" ?
+                    parseInt(this.name.split("colorwheel")[1]) : 0;
+                let output = document.getElementById("text_editing");
+                if (output) {
+                    // access the current colorwheel color
+                    let features = output.value.split(";");
+                    // convert from '0x' hex notation (which Three.JS uses) to
+                    // '#' hex notation (which HTML uses)
+                    let hex_color = "#" + (features[index].split("0x")[1]).toUpperCase();
+                    // create a rectangle in the picked color
+                    ctx.fillStyle = hex_color;
+                    ctx.fillRect((this.w / 2) - 15, this.h + 10, 30, 30);
+                }
+            }
             // draw this at (0,0), which should be in local coordinates
             ctx.drawImage(this.image, 0, 0);
+            // draw a circle representing the value in the slider
+            if (this.name.includes("slider")) {
+                // the dimension sliders are 1-indexed and start at 6 in the
+                // features
+                let index = parseInt(this.name.split("slider")[1]) + 5;
+                // get the features string
+                let output = document.getElementById("text_editing");
+                if (output) {
+                    // access the current colorwheel color
+                    let features = output.value.split(";");
+                    let value = parseFloat(features[index]);
+                    // draw a circle at the value in the slider
+                    ctx.beginPath();
+                    ctx.arc(value * this.w, (this.h / 2), 15, 0, 2 * Math.PI);
+                    // match the style of the default HTML slider
+                    ctx.fillStyle = "#0275FF";
+                    ctx.fill();
+                }
+            }
         }
         //draw a frame indicating the (input) bounding box if requested
         if (showDebugFrame) {

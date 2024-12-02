@@ -141,7 +141,10 @@ export class FSM {
     // transition matching the given event is found, the transitin is "taken" (it's 
     // actions are executed, and the FSM moves to the indicated state).  At that point
     // the event is considered "consumed", and no additional transitions are considered.
-    actOnEvent(evtType, reg) {
+    // Note for final project: I added mouseX and mouseY as parameters so that I could
+    // have space-related interactions (sliders, color pickers) and the canvas so that
+    // I could read the canvas color for the color picker
+    actOnEvent(evtType, reg, mouseX, mouseY, ctx) {
         // if we never got the current state bound (maybe a bad json FSM?) bail out
         if (!this.currentState)
             return;
@@ -152,7 +155,7 @@ export class FSM {
             if (transition.match(evtType, reg)) {
                 // if it is a match, execute every action...
                 transition.actions.forEach(action => {
-                    action.execute(evtType, reg);
+                    action.execute(evtType, reg, mouseX, mouseY, ctx);
                 });
                 // ... and update the current state to the new one
                 // (the transition's target)
